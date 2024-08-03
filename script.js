@@ -1,34 +1,30 @@
 const addbtn = document.querySelector("#addBtn");
 const main = document.querySelector("#main");
-//button functionality
+
+// button functionality
 addbtn.addEventListener("click", function() {
     addNote();
-
 });
 
-//pusing the notes text into data array.
-const savenotes= () =>{
-    const notes=document.querySelector(".note textarea");
-    const data=[];
-    notes.forEach( 
-        (note)=>{
+// pushing the notes text into data array.
+const savenotes = () => {
+    const notes = document.querySelectorAll(".note textarea");
+    const data = [];
+    notes.forEach(
+        (note) => {
             data.push(note.value);
         }
-    )
-    //storing the data in the local storage browsers
-    if(data.length===0){
-        localStorage.removeItem("notes")
-    }else{
-    localStorage.setItem("note",JSON.stringify(data))
-    alert("Saved")
-    
-    //stringify are used to convert array of object data into string 
-    //because local storage only store string data
+    );
+    // storing the data in the local storage browsers
+    if (data.length === 0) {
+        localStorage.removeItem("notes");
+    } else {
+        localStorage.setItem("notes", JSON.stringify(data));
+        
+        // stringify are used to convert array of object data into string 
+        // because local storage only store string data
     }
 }
-
-
-
 
 // Adding new div class notes
 const addNote = () => {
@@ -41,51 +37,44 @@ const addNote = () => {
     </div>
     <textarea></textarea>
     `;
- //Delete the notes
+    // Delete the notes
     note.querySelector(".trash").addEventListener("click",
-        function(){
+        function() {
             note.remove();
             savenotes();
         }
-    )
-// Save the notes
+    );
+    // Save the notes
     note.querySelector(".save").addEventListener("click",
-        function(){
+        function() {
             savenotes();
-            window.alert("Your Data is")
+            alert("saved");
         }
-    )
-// saving textarea notes
+    );
+    // saving textarea notes
     note.querySelector("textarea").addEventListener(
         "focusout",
         function() {
-            savenotes()
+            savenotes();
         }
-    )
-    //adding new notes
+    );
+    // adding new notes
     main.appendChild(note);
     savenotes();
 };
-//Retriving of data from local storage
+// Retrieving of data from local storage
 (
-    function(){
-   const lsnotes=JSON.parse(localStorage.getItem("notes"))// parse is used to covert string data into again 
-   //array of object or object data
-   if(lsnotes==null){
-      addNote();
-   }
-   else{
-    lsnotes.forEach(
-        (lsnotes)=>{
-              addNote(lsnotes)
+    function() {
+        const lsnotes = JSON.parse(localStorage.getItem("notes")); // parse is used to convert string data into again 
+        // array of object or object data
+        if (lsnotes == null) {
+            addNote();
+        } else {
+            lsnotes.forEach(
+                (lsnotes) => {
+                    addNote();
+                }
+            );
         }
-    )
-
     }
-   }
-)()
-
-
-
-
-
+)();
