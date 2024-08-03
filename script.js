@@ -3,6 +3,7 @@ const main = document.querySelector("#main");
 //button functionality
 addbtn.addEventListener("click", function() {
     addNote();
+
 });
 
 //pusing the notes text into data array.
@@ -18,7 +19,10 @@ const savenotes= () =>{
     if(data.length===0){
         localStorage.removeItem("notes")
     }else{
-    localStorage.setItem("note",JSON.stringify(data))//stringify are used to convert array of object data into string 
+    localStorage.setItem("note",JSON.stringify(data))
+    alert("Saved")
+    
+    //stringify are used to convert array of object data into string 
     //because local storage only store string data
     }
 }
@@ -48,6 +52,7 @@ const addNote = () => {
     note.querySelector(".save").addEventListener("click",
         function(){
             savenotes();
+            window.alert("Your Data is")
         }
     )
 // saving textarea notes
